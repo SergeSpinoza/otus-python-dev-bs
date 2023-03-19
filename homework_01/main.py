@@ -52,10 +52,10 @@ def filter_numbers(num_list, type):
     """
 
     if type == EVEN:
-        print("<<<", list(filter(is_even, num_list)))
+        print(list(filter(is_even, num_list)))
     elif type == ODD:
-        print("<<<", list(filter(is_odd, num_list)))
+        print(list(filter(is_odd, num_list)))
     elif type == PRIME:
-        print("<<<", list(filter(is_prime, num_list)))
+        print(list(filter(is_prime, num_list)))
     else:
         print("Error!")
