@@ -41,11 +41,8 @@ async def add_to_db(rows: list):
 
 
 def json_to_user_model(user: dict) -> User:
-    u = User(
-        id=user["id"], name=user["name"], username=user["username"], email=user["email"]
-    )
-    return u
-
+    return User(
+    id=user["id"], name=user["name"], username=user["username"], email=user["email"])
 
 def json_to_post_model(post: dict) -> Post:
     p = Post(title=post["title"], body=post["body"], user_id=post["userId"])
@@ -73,10 +70,9 @@ async def fetch_users_posts_count():
         session: AsyncSession
 
         user_posts_count = func.count(Post.user_id).label("total_posts")
-        j = join(User, Post, User.id == Post.user_id)
         stmt = (
             select(User.username, User.email, user_posts_count)
-            .select_from(j)
+            .select_from(join(User, Post, User.id == Post.user_id))
             .group_by(User.username, User.email)
             .order_by(User.username)
         )
